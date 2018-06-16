@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CESOpenDay</title>
+    <link href="/static/cesod/fontgoogle.css" rel="stylesheet">
+    <link href="/static/cesod/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <script src="/static/cesod/jquery.rotate.js"></script>
+    <script src="/static/cesod/index.js"></script>
+    <link href="/static/cesod/main.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'acm:index' %}">CesChallenge</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {% block navbar %}
+                        <li class="active"><a href="{% url 'acm:index' %}">主页</a></li>
+                        <li><a href="{% url 'acm:login' %}">登陆</a></li>
+                        <li><a href="{% url 'acm:change' %}">查看信息</a></li>
+                    {% endblock %}
+                    {#                    <li class="dropdown">#}
+                    {#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"#}
+                    {#                           role="button" aria-haspopup="true"#}
+                    {#                           aria-expanded="false">Dropdown <span#}
+                    {#                                class="caret"></span></a>#}
+                    {#                        <ul class="dropdown-menu">#}
+                    {#                            <li><a href="#">Action</a></li>#}
+                    {#                            <li><a href="#">Another action</a></li>#}
+                    {#                            <li><a href="#">Something else here</a></li>#}
+                    {#                            <li role="separator" class="divider"></li>#}
+                    {#                            <li class="dropdown-header">Nav header</li>#}
+                    {#                            <li><a href="#">Separated link</a></li>#}
+                    {#                            <li><a href="#">One more separated link</a></li>#}
+                    {#                        </ul>#}
+                    {#                    </li>#}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% if user.id %}
+                        {% if user.is_superuser %}
+                            <li><a href="/admin" type="button">
+                                管理后台</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'change-passwd' %}" type="button">
+                            修改密码</a></li>
+                        <li><a href="{% url 'acm:logout' %}" type="button">
+                            退出登陆</a></li>
+                    {% else %}
+                        <li><a href="{% url 'acm:login' %}" type="button">
+                            登陆</a>
+                        <li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row" style="padding-top: 10%;">
+        {% block index %}
+            <div class="col-lg-6 col-sm-6 col-lg-offset-3 col-sm-offset-3">
+
+                <div class="logo" style="display: none; margin-bottom: 10%">
+                    <center>
+                        <img class="pic" src="/static/cesod/computer.jpg" alt="" style="width: 10px; height: 10px; ">
+                        <br>
+                        <h3>上海大学计算机工程与科学学院</h3>
+                    </center>
+                </div>
+
+
+                <a href="{% url 'cesod:getin' %}" type="button" class="btn btn-primary btn-block">
+                    我要加入
+                </a>
+            </div>
+        {% endblock %}
+
+    </div>
+</div>
+
+</body>
+
+</html>
